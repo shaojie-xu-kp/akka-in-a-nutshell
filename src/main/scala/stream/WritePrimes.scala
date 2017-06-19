@@ -2,6 +2,7 @@ package stream
 
 import java.io.File
 
+import akka.NotUsed
 import akka.actor.ActorSystem
 import akka.stream.scaladsl._
 import akka.stream.{ActorMaterializer, ClosedShape}
@@ -19,7 +20,7 @@ object WritePrimes {
 
     // generate random numbers
     val maxRandomNumberSize = 1000000
-    val primeSource: Source[Int, Unit] =
+    val primeSource: Source[Int, NotUsed] =
       Source.fromIterator(() => Iterator.continually(ThreadLocalRandom.current().nextInt(maxRandomNumberSize))).
         // filter prime numbers
         filter(rnd => isPrime(rnd)).

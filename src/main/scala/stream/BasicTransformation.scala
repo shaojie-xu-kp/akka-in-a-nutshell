@@ -18,10 +18,10 @@ object BasicTransformation {
          |when an unknown printer took a galley of type and scrambled it to make a type
          |specimen book.""".stripMargin
 
-    Source.fromIterator(() => text.split("\\s").iterator).
-      map(_.toUpperCase).
-      runForeach(println).
-      onComplete(_ => system.terminate())
+    Source.fromIterator(() => text.split("\\s").iterator)
+                      .map(st => st.toUpperCase())
+                      .runForeach(println)
+                      .onComplete(_ => system.terminate())
 
     // could also use .runWith(Sink.foreach(println)) instead of .runForeach(println) above
     // as it is a shorthand for the same thing. Sinks may be constructed elsewhere and plugged
